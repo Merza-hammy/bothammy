@@ -3,32 +3,31 @@ import json
 import requests
 import os
 
-app = Flask(__name__)
-port = int(os.environ["PORT"])
-print(port)
+app = Flask(__name__, static_url_path='')
 
-@app.route('/', methods=['POST'])
-def index():
-  print(port)
-  data = json.loads(request.get_data())
+@app.route('/')
+def indexPage():
+    return app.send_static_file('index.html') 
 
-  # FETCH THE CRYPTO NAME
-  crypto_name = data['conversation']['memory']['crypto']['value']
+@app.route('/weather', methods=['POST'])
+def getweather():
+    data = json.loads(request.get_data())
+    #Get City
+    city = data['nlp']['entities']['location'][0]['raw']
+    #Fetch Weather Data
+    r = requests.get("https://api.apixu.com/v1/current.json?key=<9a48c907e1534875947150810181312>&q="+city)
 
-  # FETCH BTC/USD/EUR PRICES
-  r = requests.get("https://min-api.cryptocompare.com/data/price?fsym="+crypto_name+"&tsyms=BTC,USD,EUR")
-
-  return jsonify(
+    return jsonify(
     status=200,
     replies=[{
       'type': 'text',
-      'content': 'El precio de el %s es %f BTC y %f USD' % (crypto_name, r.json()['BTC'], r.json()['USD'])
-   }]
+      'content': 'La temperatura en %s, %s es de %d °C. Hay vientos de %d kmh y humedad del %d %%'
+       % (r.json()['location']['name'], r.json()['location']['country'],
+       r.json()['current']['temp_c'], r.json()['current']['wind_kph'],
+       r.json()['current']['humidity']),
+    }]
   )
-
-@app.route('/errors', methods=['POST'])
-def errors():
-  print(json.loads(request.get_data()))
-  return jsonify(status=200)
-
-app.run(port=port, host="0.0.0.0")
+port = os.getenv('PORT', 8080)
+if __name__ == '__main__':
+    app.debug = not os.getenv('PORT')
+    app.run(host='0.0.0.0', port=int(port))
