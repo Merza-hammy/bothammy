@@ -15,7 +15,7 @@ def index():
     #Get City
   city = dat['conversation']['memory']['city']['raw']
     #Fetch Weather Data
-  r = requests.get("https://api.apixu.com/v1/current.json?key=<9a48c907e1534875947150810181312>&q="+city)
+  r = requests.get("https://api.apixu.com/v1/current.json?key=9a48c907e1534875947150810181312&q="+city)
 
   return jsonify(
     status=200,
