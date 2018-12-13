@@ -13,11 +13,11 @@ def index():
   data = json.loads(request.get_data()) 
 
     #Get City
-    city = data['nlp']['entities']['location'][0]['raw']
+  city = dat['conversation']['memory']['city']['value']
     #Fetch Weather Data
-    r = requests.get("https://api.apixu.com/v1/current.json?key=<9a48c907e1534875947150810181312>&q="+city)
+  r = requests.get("https://api.apixu.com/v1/current.json?key=<9a48c907e1534875947150810181312>&q="+city)
 
-    return jsonify(
+  return jsonify(
     status=200,
     replies=[{
       'type': 'text',
@@ -27,7 +27,10 @@ def index():
        r.json()['current']['humidity']),
     }]
   )
-port = os.getenv('PORT', 8080)
-if __name__ == '__main__':
-    app.debug = not os.getenv('PORT')
-    app.run(host='0.0.0.0', port=int(port))
+
+@app.route('/errors', methods=['POST'])
+def errors():
+  print(json.loads(request.get_data()))
+  return jsonify(status=200)
+
+app.run(port=port, host="0.0.0.0")
