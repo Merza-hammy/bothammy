@@ -3,21 +3,22 @@ import json
 import requests
 import os
 
-app = Flask(__name__, static_url_path='')
+app = Flask(__name__)
+port = int(os.environ["PORT"])
+print(port)
 
-@app.route('/')
-def indexPage():
-    return app.send_static_file('index.html') 
+@app.route('/', methods=['POST'])
+def index():
+  print(port)
+  data = json.loads(request.get_data())
 
-@app.route('/weather', methods=['POST'])
-def getweather():
-    data = json.loads(request.get_data())
-    #Get City
-    city = data['nlp']['entities']['location'][0]['raw']
-    #Fetch Weather Data
-    r = requests.get("https://api.apixu.com/v1/current.json?key=9a48c907e1534875947150810181312&q="+city)
+  # FETCH THE CRYPTO NAME
+  city = data['conversation']['memory']['location']['value']
 
-    return jsonify(
+  # FETCH BTC/USD/EUR PRICES
+  r = requests.get("https://api.apixu.com/v1/current.json?key=9a48c907e1534875947150810181312&q="+city)
+
+  return jsonify(
     status=200,
     replies=[{
       'type': 'text',
@@ -27,7 +28,10 @@ def getweather():
        r.json()['current']['humidity']),
     }]
   )
-port = os.getenv('PORT', 8080)
-if __name__ == '__main__':
-    app.debug = not os.getenv('PORT')
-    app.run(host='0.0.0.0', port=int(port))
+
+@app.route('/errors', methods=['POST'])
+def errors():
+  print(json.loads(request.get_data()))
+  return jsonify(status=200)
+
+app.run(port=port, host="0.0.0.0")
