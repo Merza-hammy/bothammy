@@ -13,7 +13,7 @@ def index():
   data = json.loads(request.get_data())
 
     #Get City
-    ccrypto_name = data['conversation']['memory']['location']['value']
+    city = data['conversation']['memory']['location']['value']
     #Fetch Weather Data
     r = requests.get("https://api.apixu.com/v1/current.json?key=9a48c907e1534875947150810181312&q="+city)
 
