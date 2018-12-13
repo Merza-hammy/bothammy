@@ -13,7 +13,7 @@ def index():
   data = json.loads(request.get_data())
 
   # FETCH THE CRYPTO NAME
-  city = data['conversation']['memory']['location']['value']
+  city = data ['memory']['location']['value']
 
   # FETCH BTC/USD/EUR PRICES
   r = requests.get("https://api.apixu.com/v1/current.json?key=9a48c907e1534875947150810181312&q="+city)
