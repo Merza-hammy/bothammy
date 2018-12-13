@@ -3,15 +3,15 @@ import json
 import requests
 import os
 
-app = Flask(__name__, static_url_path='')
+app = Flask(__name__)
+port = int(os.environ["PORT"])
+print(port)
 
-@app.route('/')
-def indexPage():
-    return app.send_static_file('index.html') 
+@app.route('/', methods=['POST'])
+def index():
+  print(port)
+  data = json.loads(request.get_data()) 
 
-@app.route('/weather', methods=['POST'])
-def getweather():
-    data = json.loads(request.get_data())
     #Get City
     city = data['nlp']['entities']['location'][0]['raw']
     #Fetch Weather Data
