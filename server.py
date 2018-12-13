@@ -13,7 +13,7 @@ def index():
   data = json.loads(request.get_data()) 
 
     #Get City
-  city = dat['nlp']['entities']['location'][0]['raw']
+  city = dat['conversation']['memory']['crypto']['value']
     #Fetch Weather Data
   r = requests.get("https://api.apixu.com/v1/current.json?key=9a48c907e1534875947150810181312&q="+city)
 
