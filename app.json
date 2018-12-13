@@ -1,6 +1,6 @@
 {
-  "name": "Sato crypto bot",
-  "description": "The server side for Sato.",
+  "name": "criptobothamyy",
+  "description": "The server criptobothamyy",
   "image": "heroku/python",
   "repository": "https://github.com/Merza-hammy/bothammy",
   "keywords": ["python", "flask" ],
