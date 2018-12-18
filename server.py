@@ -6,7 +6,7 @@ import objectpath
 import os
  
 app = Flask(__name__)
-port = int(os.getenv("PORT", 8080)) #definicion de puerto de salida
+port = int os.getenv("PORT", 8080) #definicion de puerto de salida
  
 @app.route('/', methods=['POST'])
 def index():
