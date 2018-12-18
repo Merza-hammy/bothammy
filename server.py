@@ -12,8 +12,8 @@ port = int(os.getenv("PORT", 8080)) #definicion de puerto de salida
 def index():
   
                 postRece = json.loads(request.get_data())
-                intent = str(postRece['nlp']['intents'][0]['slug']) #Se obtiene el nombre del intent desde el post de Recast
-                skill = str(postRece['conversation']['skill']) #Se obtiene el nombre del skill desde el post de Recast
+                reportehana = str(postRece['nlp']['intents'][0]['slug']) #Se obtiene el nombre del intent desde el post de Recast
+                reporteshana = str(postRece['conversation']['skill']) #Se obtiene el nombre del skill desde el post de Recast
                 print(skill)
                 print(intent)
                 if intent == "intentname" and skill == "lskillname": #Si el intent y el skill es el esperado
