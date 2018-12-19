@@ -99,3 +99,4 @@ app.run(host='0.0.0.0',  port=port) #importante indicar host para deployment en 
 #API Endpoint:https://api.cf.eu10.hana.ondemand.com
 #cf push botRecast manifest file C:\Users\i861443\Desktop\python SCP\Recast\manifest.yml
 #requirements.txt para instalación de imports
+
