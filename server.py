@@ -6,17 +6,17 @@ import objectpath
 import os
  
 app = Flask(__name__)
-port = int (os.getenv("PORT", 8080)) #definicion de puerto de salida
+port = int(os.environ["PORT"]) #definicion de puerto de salida
  
 @app.route('/', methods=['POST'])
 def index():
   
                 postRece = json.loads(request.get_data())
-                reportehana = str(postRece['nlp']['intents'][0]['slug']) #Se obtiene el nombre del intent desde el post de Recast
-                reporteshana = str(postRece['conversation']['skill']) #Se obtiene el nombre del skill desde el post de Recast
+                reportehanna = str(postRece['nlp']['intents'][0]['slug']) #Se obtiene el nombre del intent desde el post de Recast
+                hanna = str(postRece['conversation']['skill']) #Se obtiene el nombre del skill desde el post de Recast
               
-                if intent == "intentname" and skill == "lskillname": #Si el intent y el skill es el esperado
-                                               entity = str(postRece['nlp']['entities']['entity_name'][0]['raw']) #Obtengo el nombre de la entidad (Si e necesaria para hacer la llamada a HANA)
+                if intent == "reportehanna" and skill == "hanna": #Si el intent y el skill es el esperado
+                                               nombre_reporte = str(postRece['nlp']['entities']['reporte_nombre'][0]['raw']) #Obtengo el nombre de la entidad (Si e necesaria para hacer la llamada a HANA)
                                                jsonData  = ExecuteGet("https://xs01b14ae55f1.us1.hana.ondemand.com/recast1/recast1_service.xsodata/QUESTION2?$format=json&$filter=FILTROUNO eq '"+entity+"'") #Se hace el request a un XSJS con los parámetros necesarios para hacer la consulta
                                                data = processData(jsonData) #Envía la respuesta de HANA y la procesa para cumplir con el formato de Recast
                
