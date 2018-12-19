@@ -12,8 +12,8 @@ port = int(os.environ["PORT"]) #definicion de puerto de salida
 def index():
   
                 postRece = json.loads(request.get_data())
-                reportehanna = str(postRece['nlp']['intents'][0]['slug']) #Se obtiene el nombre del intent desde el post de Recast
-                hanna = str(postRece['conversation']['skill']) #Se obtiene el nombre del skill desde el post de Recast
+                reportehanna = str(postRece['nlp']['reportehanna'][0]['slug']) #Se obtiene el nombre del intent desde el post de Recast
+                hanna = str(postRece['conversation']['hanna']) #Se obtiene el nombre del skill desde el post de Recast
               
                 if intent == "reportehanna" and skill == "hanna": #Si el intent y el skill es el esperado
                                                nombre_reporte = str(postRece['nlp']['entities']['reporte_nombre'][0]['raw']) #Obtengo el nombre de la entidad (Si e necesaria para hacer la llamada a HANA)
