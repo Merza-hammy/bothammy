@@ -37,7 +37,7 @@ def ExecuteGet(request): #Ejecuta el request a HANA
   URL = request
                
   # defining a params dict for the parameters to be sent to the API
-  HEADERS = {'Authorization': "Basic {Base 64}"} #Agregar Autenticación Básica (Usuario y contraseña) de la base de datos en formato Base64
+  HEADERS = {'Authorization': "Basic {'H90esbarajas:Interfaz-334'}"} #Agregar Autenticación Básica (Usuario y contraseña) de la base de datos en formato Base64
                
   # sending get request and saving the response as response object
   r = requests.get(url=URL,headers=HEADERS)
