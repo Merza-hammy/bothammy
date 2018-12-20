@@ -12,11 +12,11 @@ port = int(os.environ["PORT"]) #definicion de puerto de salida
 def index():
   
                 postRece = json.loads(request.get_data())
-                intent = str(postRece['nlp']['reportehanna'][0]['slug']) #Se obtiene el nombre del intent desde el post de Recast
-                skill = str(postRece['conversation']['hanna']) #Se obtiene el nombre del skill desde el post de Recast
+                intent = str(postRece['nlp']['reportehana'][0]['slug']) #Se obtiene el nombre del intent desde el post de Recast
+                skill = str(postRece['conversation']['hana']) #Se obtiene el nombre del skill desde el post de Recast
                 print(skill)
                 print(intent)
-                if intent == "reportehanna" and skill == "hanna": #Si el intent y el skill es el esperado
+                if intent == "reportehana" and skill == "hana": #Si el intent y el skill es el esperado
                                                entity = str(postRece['nlp']['entities']['nombre_reporte'][0]['raw']) #Obtengo el nombre de la entidad (Si e necesaria para hacer la llamada a HANA)
                                                jsonData  = ExecuteGet("http://10.177.52.59:8002/oData_ServicesH07/services/DiBoPulsoStocks.xsodata/QUESTION2?$format=json&$filter=FILTROUNO eq '"+entity+"'") #Se hace el request a un XSJS con los parámetros necesarios para hacer la consulta
                                                data = processData(jsonData) #Envía la respuesta de HANA y la procesa para cumplir con el formato de Recast
