@@ -18,7 +18,7 @@ def index():
                 print(intent)
                 if intent == "reportehanna" and skill == "hanna": #Si el intent y el skill es el esperado
                                                entity = str(postRece['nlp']['entities']['nombre_reporte'][0]['raw']) #Obtengo el nombre de la entidad (Si e necesaria para hacer la llamada a HANA)
-                                               jsonData  = ExecuteGet("https://xs01b14ae55f1.us1.hana.ondemand.com/recast1/recast1_service.xsodata/QUESTION2?$format=json&$filter=FILTROUNO eq '"+entity+"'") #Se hace el request a un XSJS con los parámetros necesarios para hacer la consulta
+                                               jsonData  = ExecuteGet("http://10.177.52.59:8002/oData_ServicesH07/services/DiBoPulsoStocks.xsodata/QUESTION2?$format=json&$filter=FILTROUNO eq '"+entity+"'") #Se hace el request a un XSJS con los parámetros necesarios para hacer la consulta
                                                data = processData(jsonData) #Envía la respuesta de HANA y la procesa para cumplir con el formato de Recast
                
                 else: # En caso de no ser una opción validad, mandamos un mensaje fijo.
