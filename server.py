@@ -5,7 +5,7 @@ app = Flask(__name__)
                 
 
 
- if intent == "sumar" and skill == "suma": #Si el intent y el skill es el esperado
+ if intent == "hola mundo": #Si el intent y el skill es el esperado
   
 def hello_world():
     return 'Hola ponchis'
