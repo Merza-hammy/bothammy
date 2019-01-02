@@ -19,9 +19,9 @@ port = int(os.environ["PORT"]) #definicion de puerto de salida
                 #print(intent)
                 if intent == "sumar" and skill == "suma": #Si el intent y el skill es el esperado
                                               
-                a=float
-                b=float
-               suma= a+b
+                numero1=float
+                numero2=float
+               suma= numero1+numero2
                print(str(suma))
 
                
